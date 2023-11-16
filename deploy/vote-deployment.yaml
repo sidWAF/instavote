@@ -18,7 +18,7 @@ spec:
         app: vote
     spec:
       containers:
-      - image: schoolofdevops/voteapp-python:v0.1.0
+      - image: wpatterson134/test_vote:latest
         name: vote
         resources: {}
 status: {}
