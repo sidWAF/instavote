@@ -18,7 +18,7 @@ spec:
         app: vote
     spec:
       containers:
-      - image: wpatterson134/test_vote:16
+      - image: wpatterson134/test_vote:17
         name: vote
         resources: {}
 status: {}
