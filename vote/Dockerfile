@@ -5,6 +5,7 @@ FROM schoolofdevops/voteapp-python:v0.1.0
 WORKDIR /app
 
 # Install our requirements.txt
+RUN pip freeze > requirements.txt
 ADD requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
