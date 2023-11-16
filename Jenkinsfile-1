@@ -9,7 +9,7 @@ node {
 
     stage('Build image') {
   
-       app = docker.build("wpatterson134/test_vote")
+       app = docker.build("wpatterson134/test_vote", "-f vote/Dockerfile .")
     }
 
     stage('Test image') {
