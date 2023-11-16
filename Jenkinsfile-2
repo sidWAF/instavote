@@ -16,6 +16,7 @@ node {
                         sh "git config user.name wpatterson134"
                         //sh "git switch master"
                         sh "cd deploy"
+                        sh "pwd"
                         sh "cat vote-deployment.yaml"
                         sh "sed -i 's+wpatterson134/test_vote.*+wpatterson134/test_vote:${DOCKERTAG}+g' ./deploy/vote-deployment.yaml"
                         sh "cat vote-deployment.yaml"
