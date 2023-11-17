@@ -13,19 +13,6 @@
     }
 
 
-    boolean isMyDirChangedOne() {
-      for (changeLogSet in currentBuild.changeSets) { 
-        
-            if (changeLogSet ==~ "**/vote/*.*") {
-              return true
-            }
-          }
-        }
-      }        
-      return false
-    }
-
-
 node {
 
     def app
