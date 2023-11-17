@@ -1,18 +1,3 @@
-    @NonCPS
-    boolean isMyDirChanged() {
-      for (changeLogSet in currentBuild.changeSets) { 
-        for (entry in changeLogSet.getItems()) { // for each commit in the detected changes
-          for (file in entry.getAffectedFiles()) {
-            if (file.getPath() ==~ "/vote/*.*") {
-              return true
-            }
-          }
-        }
-      }        
-      return false
-    }
-
-
 node {
 
     def app
@@ -25,19 +10,11 @@ node {
 
     stage('Build image') {
     
-       if (isMyDirChanged()) {
           app = docker.build("wpatterson134/test_vote", "-f ./vote/Dockerfile .")
-        } else {
-          currentBuild.result = 'SUCCESS'
-          return
-        }   
-       
+        
     }
 
-    if(currentBuild.result == 'SUCCESS') {
-        return //this will exit the pipeline
-    }
-
+    
     stage('Test image') {
   
 
