@@ -1,13 +1,4 @@
 node {
-    def app
-
-    stage('Clone repository') {
-      
-
-        checkout scm
-    }
-
-    stage('Build image') {
     @NonCPS
 boolean isMyDirChanged() {
   for (changeLogSet in currentBuild.changeSets) { 
@@ -21,6 +12,19 @@ boolean isMyDirChanged() {
   }
   return false
 }
+
+
+
+    def app
+
+    stage('Clone repository') {
+      
+
+        checkout scm
+    }
+
+    stage('Build image') {
+    
        if (isMyDirChanged()) {
           app = docker.build("wpatterson134/test_vote", "-f ./vote/Dockerfile .")
         } else {
