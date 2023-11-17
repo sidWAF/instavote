@@ -28,11 +28,11 @@ node {
 
           app = docker.build("wpatterson134/test_vote", "-f ./vote/Dockerfile .")
         } else {
-            currentBuild.result = SUCCESS
+            currentBuild.result = "SUCCESS"
             return
     }
 }
-    if (currentBuild.result == SUCCESS) {
+    if (currentBuild.result == "SUCCESS") {
         return
     }
 
