@@ -1,4 +1,21 @@
+@NonCPS
+boolean isMyDirChanged() {
+  for (changeLogSet in currentBuild.changeSets) { 
+    for (entry in changeLogSet.getItems()) { // for each commit in the detected changes
+      for (file in entry.getAffectedFiles()) {
+        println(file.getPath() + "Printing path of changeset file")
+        if (file.getPath().matches("result(/.*)")) {
+          return true
+        }
+      }
+    }
+  }
+  return false
+}
+
+
 node {
+
     def app
 
     stage('Clone repository') {
@@ -8,8 +25,16 @@ node {
     }
 
     stage('Build image') {
-  
-       app = docker.build("wpatterson134/test_result", "-f ./result/Dockerfile .")
+        if (isMyDirChanged()) {
+
+          app = docker.build("wpatterson134/test_result", "-f ./result/Dockerfile .")
+        } else {
+            currentBuild.result = "SUCCESS"
+            return
+    }
+}
+    if (currentBuild.result == "SUCCESS") {
+        return
     }
 
     stage('Test image') {
