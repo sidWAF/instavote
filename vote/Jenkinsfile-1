@@ -4,7 +4,7 @@ boolean isMyDirChanged() {
     for (entry in changeLogSet.getItems()) { // for each commit in the detected changes
       for (file in entry.getAffectedFiles()) {
         println(file.getPath() + "Printing path of changeset file")
-        if (file.getPath() == ".*/vote($5|/.*)") {
+        if (file.getPath() == ".*/vote(/.*)") {
           return true
         }
       }
