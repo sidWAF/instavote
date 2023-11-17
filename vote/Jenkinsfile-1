@@ -29,9 +29,13 @@ node {
           app = docker.build("wpatterson134/test_vote", "-f ./vote/Dockerfile .")
         } else {
           currentBuild.result = 'SUCCESS'
-          continue
+          return
         }   
        
+    }
+
+    if(currentBuild.result == 'SUCCESS') {
+        return //this will exit the pipeline
     }
 
     stage('Test image') {
