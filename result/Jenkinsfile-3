@@ -27,7 +27,7 @@ node {
     stage('Build image') {
         if (isMyDirChanged()) {
 
-          app = docker.build("wpatterson134/test_result")
+          app = docker.build("wpatterson134/test_result", "-f ./result/Dockerfile .")
         } else {
             currentBuild.result = "SUCCESS"
             return
