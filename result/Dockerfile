@@ -6,7 +6,7 @@ WORKDIR /app
 RUN npm config set unsafe-perm true
 RUN npm install -g nodemon
 RUN npm config set registry https://registry.npmjs.org
-COPY package.json /app/package.json
+COPY /result/package.json /app/package.json
 RUN npm install \
  && npm ls \
  && npm cache clean --force \
