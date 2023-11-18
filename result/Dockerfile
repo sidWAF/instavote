@@ -3,13 +3,17 @@ FROM schoolofdevops/vote-result:latest
 
 RUN mkdir -p /app
 WORKDIR /app
+
 # build in jenkins
 RUN npm config set unsafe-perm true
 RUN npm install -g nodemon
 RUN npm config set registry https://registry.npmjs.org
+
 COPY /result/package.json /app/package.json
 COPY /result/server.js /app/server.js
 COPY /result/views/* /app/views/
+COPY /result/views/stylesheets/style.css /app/views/stylesheets/style.css
+
 RUN npm install \
  && npm ls \
  && npm cache clean --force \
