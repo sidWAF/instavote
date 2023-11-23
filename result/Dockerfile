@@ -1,4 +1,4 @@
-FROM schoolofdevops/vote-result:latest
+FROM node:8.9-alpine
 
 
 RUN mkdir -p /app
