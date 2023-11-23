@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"creationTimestamp":null,"labels":{"app":"db","app.kubernetes.io/instance":"client-feedback"},"name":"db","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"db"}},"strategy":{},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"db"}},"spec":{"containers":[{"image":"postgres:9.4","name":"postgres","resources":{}}]}}},"status":{}}
+  creationTimestamp: "2023-11-23T05:35:22Z"
+  generation: 2
+  labels:
+    app: db
+    app.kubernetes.io/instance: client-feedback
+  name: db
+  namespace: default
+  resourceVersion: "22344"
+  uid: f44051c8-cccc-4c93-a6d9-dd0a5b9cfa7b
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: db
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: db
+    spec:
+      containers:
+      - args:
+        - postgres
+        - -c
+        - listen_addresses=*
+        - -c
+        - shared_preload_libraries=pg_stat_statements
+        command:
+        - docker-entrypoint.sh
+        image: postgres:9.4
+        imagePullPolicy: IfNotPresent
+        name: postgres
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2023-11-23T05:35:22Z"
+    lastUpdateTime: "2023-11-23T05:35:29Z"
+    message: ReplicaSet "db-794ffd8b58" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2023-11-23T05:35:30Z"
+    lastUpdateTime: "2023-11-23T05:35:30Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
