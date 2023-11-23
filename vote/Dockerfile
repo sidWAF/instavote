@@ -7,6 +7,8 @@ WORKDIR /app
 # Install our requirements.txt
 # RUN pip freeze > requirements.txt
 ADD vote/requirements.txt /app/requirements.txt
+COPY vote/templates/index.html /app/templates/index.html
+COPY vote/static/stylesheets/* /app/static/stylesheets/
 RUN pip install -r requirements.txt
 
 # Copy our code from the current folder to /app inside the container
