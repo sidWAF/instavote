@@ -21,4 +21,9 @@ spec:
       - image: schoolofdevops/worker:latest
         name: worker
         resources: {}
+        env:
+        - name: DATABASE_URL
+          value: postgresql://postgres:post@db:5432/db
+        - name: REDIS_URL
+          value: redis:6379
 status: {}
