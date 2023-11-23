@@ -18,7 +18,7 @@ spec:
         app: result
     spec:
       containers:
-      - image: wpatterson134/test_result:28
+      - image: schoolofdevops/vote-result:latest
         name: vote-result
         resources: {}
         env:
