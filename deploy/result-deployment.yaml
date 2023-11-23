@@ -21,4 +21,9 @@ spec:
       - image: wpatterson134/test_result:49
         name: vote-result
         resources: {}
+        env:
+        - name: DATABASE_URL
+          value: postgresql://postgres:post@db:5432/db
+        - name: REDIS_URL
+          value: redis:6379
 status: {}
