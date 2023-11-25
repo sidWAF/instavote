@@ -65,7 +65,7 @@ function collectVotesFromResult(result) {
 }
 
 app.use(cookieParser());
-//app.use(bodyParser());
+////app.use(bodyParser());
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(methodOverride('X-HTTP-Method-Override'));
