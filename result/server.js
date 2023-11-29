@@ -1,7 +1,7 @@
 var express = require('express'),
     async = require('async'),
-    pg = require("pg"),
-    path = require("path"),
+    { Pool } = require('pg'),
+    path = require('path'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
@@ -11,7 +11,7 @@ var express = require('express'),
 
 io.set('transports', ['polling']);
 
-var port = process.env.PORT || 5432;
+var port = process.env.PORT || 4000;
 
 io.sockets.on('connection', function (socket) {
 
@@ -22,10 +22,14 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
+var pool = new Pool({
+  connectionString: 'postgresql://postgres:post@db:5432/db'
+});
+
 async.retry(
   {times: 1000, interval: 1000},
   function(callback) {
-    pg.connect('postgresql://postgres:post@db:5432/db', function(err, client, done) {
+    pool.connect(function(err, client, done) {
       if (err) {
         console.error("Waiting for db");
       }
@@ -40,7 +44,7 @@ async.retry(
     getVotes(client);
   }
 );
-//update
+
 function getVotes(client) {
   client.query('SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote', [], function(err, result) {
     if (err) {
@@ -65,9 +69,7 @@ function collectVotesFromResult(result) {
 }
 
 app.use(cookieParser());
-////app.use(bodyParser());
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
+app.use(bodyParser());
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
