@@ -1,7 +1,7 @@
 var express = require('express'),
     async = require('async'),
-    { Pool } = require('pg'),
-    path = require('path'),
+    pg = require("pg"),
+    path = require("path"),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
@@ -22,14 +22,10 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
-var pool = new Pool({
-  connectionString: 'postgresql://postgres:post@db:5432/db'
-});
-
 async.retry(
   {times: 1000, interval: 1000},
   function(callback) {
-    pool.connect(function(err, client, done) {
+    pg.connect('postgresql://postgres:post@db:5432/db', function(err, client, done) {
       if (err) {
         console.error("Waiting for db");
       }
