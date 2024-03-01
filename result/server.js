@@ -49,6 +49,7 @@ function getVotes(client) {
     } else {
       var votes = collectVotesFromResult(result);
       io.sockets.emit("scores", JSON.stringify(votes));
+      console.log("Total votes: " + JSON.stringify(votes));
     }
 
     setTimeout(function() {getVotes(client) }, 1000);
@@ -61,7 +62,6 @@ function collectVotesFromResult(result) {
   result.rows.forEach(function (row) {
     votes[row.vote] = parseInt(row.count);
   });
-  console.log("hello world " + parseInt(row.count));
   return votes;
 }
 
