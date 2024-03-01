@@ -37,6 +37,7 @@ async.retry(
       return console.error("Giving up");
     }
     console.log("Connected to db");
+    
     getVotes(client);
   }
 );
@@ -61,6 +62,7 @@ function collectVotesFromResult(result) {
     votes[row.vote] = parseInt(row.count);
   });
   console.log("Votes" + votes);
+  console.log("My name's Jeff");
   return votes;
 }
 
