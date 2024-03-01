@@ -62,7 +62,6 @@ function collectVotesFromResult(result) {
     votes[row.vote] = parseInt(row.count);
   });
   console.log("Votes" + votes);
-  console.log("My name's Jeff");
   return votes;
 }
 
