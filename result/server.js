@@ -60,7 +60,7 @@ function collectVotesFromResult(result) {
   result.rows.forEach(function (row) {
     votes[row.vote] = parseInt(row.count);
   });
-
+  console.log("Votes" + votes);
   return votes;
 }
 
