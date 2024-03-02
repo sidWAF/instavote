@@ -49,7 +49,7 @@ function getVotes(client) {
     } else {
       var votes = collectVotesFromResult(result);
       io.sockets.emit("scores", JSON.stringify(votes));
-      console.log("Vote total: " + JSON.stringify(votes));
+      console.log("Vote to go " + JSON.stringify(votes));
     }
 
     setTimeout(function() {getVotes(client) }, 1000);
