@@ -5,16 +5,15 @@ import socket
 import random
 import json
 
-option_a = os.getenv('OPTION_A', "Like")
-option_b = os.getenv('OPTION_B', "Dislike")
+option_a = os.getenv('OPTION_A', "Emacs")
+option_b = os.getenv('OPTION_B', "Vi")
 hostname = socket.gethostname()
 version = 'v1'
 
 app = Flask(__name__)
 
 def get_redis():
-    
-            if not hasattr(g, 'redis'):
+    if not hasattr(g, 'redis'):
         g.redis = Redis(host="redis", db=0, socket_timeout=5)
     return g.redis
 
