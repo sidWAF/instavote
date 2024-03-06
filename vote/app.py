@@ -5,8 +5,8 @@ import socket
 import random
 import json
 
-option_a = os.getenv('OPTION_A', "Emacs")
-option_b = os.getenv('OPTION_B', "Vi")
+option_a = os.getenv('OPTION_A', "Yes")
+option_b = os.getenv('OPTION_B', "No")
 hostname = socket.gethostname()
 version = 'v1'
 
@@ -30,6 +30,7 @@ def hello():
         vote = request.form['vote']
         data = json.dumps({'voter_id': voter_id, 'vote': vote})
         redis.rpush('votes', data)
+        print(data)
 
     resp = make_response(render_template(
         'index.html',
