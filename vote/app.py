@@ -30,6 +30,7 @@ def hello():
         vote = request.form['vote']
         data = json.dumps({'voter_id': voter_id, 'vote': vote})
         redis.rpush('votes', data)
+        print("Hello World")
         print(data)
 
     resp = make_response(render_template(
