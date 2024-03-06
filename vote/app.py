@@ -4,6 +4,7 @@ import os
 import socket
 import random
 import json
+import boto3
 
 option_a = os.getenv('OPTION_A', "Yes")
 option_b = os.getenv('OPTION_B', "No")
@@ -33,6 +34,7 @@ def hello():
         print(vote)
         if vote == 'b':
             # trigger step-function
+            boto3.create(Step function)
         print(data)
 
     resp = make_response(render_template(
