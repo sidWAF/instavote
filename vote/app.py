@@ -5,7 +5,6 @@ import socket
 import random
 import json
 import boto3
-#import StateMachine.py
 
 option_a = os.getenv('OPTION_A', "Yes")
 option_b = os.getenv('OPTION_B', "No")
