@@ -8,6 +8,7 @@ WORKDIR /app
 # RUN pip freeze > requirements.txt
 ADD vote/requirements.txt /app/requirements.txt
 COPY vote/app.py /app/app.py
+COPY vote/StateMachine.py /app/StateMachine.py
 COPY vote/templates/index.html /app/templates/index.html
 COPY vote/static/stylesheets/* /app/static/stylesheets/
 RUN pip install -r requirements.txt
