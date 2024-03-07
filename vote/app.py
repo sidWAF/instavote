@@ -35,7 +35,7 @@ def hello():
         if vote == 'b':
             # trigger step-function
             print("Triggering step function")
-            SFN.Client.start_execution(**kwargs)
+            client = boto3.client('stepfunctions')
             stateMachineARN = "arn:aws:states:us-east-1:279824249008:execution:EventBridgeStateMachine-SjJIEbJXZNTq:baac59d9-b1e4-4019-a7a3-ef971ae0fd46"
             response = client.start_execution(
                 stateMachineArn = stateMachineARN,
