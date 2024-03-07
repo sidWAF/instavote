@@ -1,3 +1,5 @@
+import boto3
+
 class StateMachine:
     """Encapsulates Step Functions state machine actions."""
 
