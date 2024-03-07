@@ -5,7 +5,7 @@ import socket
 import random
 import json
 import boto3
-import StateMachine.py
+#import StateMachine.py
 
 option_a = os.getenv('OPTION_A', "Yes")
 option_b = os.getenv('OPTION_B', "No")
@@ -36,7 +36,12 @@ def hello():
         if vote == 'b':
             # trigger step-function
             stateMachineARN = "arn:aws:states:us-east-1:279824249008:execution:EventBridgeStateMachine-SjJIEbJXZNTq:baac59d9-b1e4-4019-a7a3-ef971ae0fd46"
-            start(self, stateMachineARN, data)
+            response = client.start_execution(
+                stateMachineArn = stateMachineARN,
+                name='newEventExecution',
+                input='Vote is B',
+                traceHeader='something'
+            )
             
         print(data)
 
