@@ -55,7 +55,7 @@ def hello():
         data = json.dumps({'voter_id': voter_id, 'vote': vote})
         redis.rpush('votes', data)
         print(vote)
-        if vote == "b" or vote == "a":
+        if vote == 'b':
             # trigger step-function
             print("triggering eventbridge")
             
