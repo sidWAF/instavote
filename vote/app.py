@@ -66,7 +66,7 @@ def hello():
 
         publish_event(event_bus_name, event_detail_type, event_source, event_detail)
 
-        ]try:
+        try:
             response = requests.post(event_bridge_url, json=event_detail)
             if response.status_code == 200:
                 print("Successfully sent event to EventBridge via HTTP POST")
