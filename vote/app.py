@@ -62,14 +62,14 @@ def hello():
 
         publish_event(event_bus_name, event_detail_type, event_source, event_detail)
 
-        try:
-            response = requests.post(event_bridge_url, json=event_detail)
-            if response.status_code == 200:
-                print("Successfully sent event to EventBridge via HTTP POST")
-            else:
-                print("Failed to send event. Status code: {response.status_code}")
-        except Exception as e:
-            print("Error sending event: {e}")
+        # try:
+        #     response = requests.post(event_bridge_url, json=event_detail)
+        #     if response.status_code == 200:
+        #         print("Successfully sent event to EventBridge via HTTP POST")
+        #     else:
+        #         print("Failed to send event. Status code: {response.status_code}")
+        # except Exception as e:
+        #     print("Error sending event: {e}")
         data = json.dumps({'voter_id': voter_id, 'vote': vote})
 
         redis.rpush('votes', data)
