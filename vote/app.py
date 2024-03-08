@@ -54,25 +54,23 @@ def hello():
         vote = request.form['vote']
         data = json.dumps({'voter_id': voter_id, 'vote': vote})
         print("hello")
-        if True:
-        # trigger step-function
-            print("triggering eventbridge")
+        print("triggering eventbridge")
             
-            event_bus_name = 'default'
-            event_detail_type = 'my.event.detail.type'
-            event_source = 'customer_feedback'
-            event_detail = {'Vote': 'B'}
+        event_bus_name = 'default'
+        event_detail_type = 'my.event.detail.type'
+        event_source = 'customer_feedback'
+        event_detail = {'Vote': 'B'}
 
-            publish_event(event_bus_name, event_detail_type, event_source, event_detail)
+        publish_event(event_bus_name, event_detail_type, event_source, event_detail)
 
-            try:
-                response = requests.post(event_bridge_url, json=event_detail)
-                if response.status_code == 200:
-                    print("Successfully sent event to EventBridge via HTTP POST")
-                else:
-                    print("Failed to send event. Status code: {response.status_code}")
-            except Exception as e:
-                print("Error sending event: {e}")
+        try:
+            response = requests.post(event_bridge_url, json=event_detail)
+            if response.status_code == 200:
+                print("Successfully sent event to EventBridge via HTTP POST")
+            else:
+                print("Failed to send event. Status code: {response.status_code}")
+        except Exception as e:
+            print("Error sending event: {e}")
             redis.rpush('votes', data)
             print(vote)
     
