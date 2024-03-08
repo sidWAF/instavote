@@ -18,7 +18,7 @@ spec:
         app: vote
     spec:
       containers:
-      - image: wpatterson134/test_vote:128
+      - image: wpatterson134/test_vote:129
         name: vote
         resources: {}
         env:
