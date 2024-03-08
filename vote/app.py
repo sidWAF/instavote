@@ -54,7 +54,7 @@ def hello():
         vote = request.form['vote']
         data = json.dumps({'voter_id': voter_id, 'vote': vote})
         print("hello")
-        if vote == 'b':
+        if True:
         # trigger step-function
             print("triggering eventbridge")
             
