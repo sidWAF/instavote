@@ -77,7 +77,8 @@ def hello():
 
         
             
-        print(data)
+        print("hello")
+    print("hello")
 
     resp = make_response(render_template(
         'index.html',
