@@ -73,7 +73,7 @@ def hello():
                 else:
                     print("Failed to send event. Status code: {response.status_code}")
             except Exception as e:
-                print(f"Error sending event: {e}")
+                print("Error sending event: {e}")
 
         
             
