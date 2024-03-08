@@ -17,6 +17,28 @@ def get_redis():
     if not hasattr(g, 'redis'):
         g.redis = Redis(host="redis", db=0, socket_timeout=5)
     return g.redis
+    
+def publish_event(event_bus_name, event_detail_type, event_source, event_detail):
+    # Initialize the EventBridge client
+    client = boto3.client('events')
+
+    # Construct the event
+    event = {
+        'DetailType': event_detail_type,
+        'Source': event_source,
+        'Detail': json.dumps(event_detail),
+        'EventBusName': event_bus_name
+    }
+
+    # Publish the event
+    response = client.put_events(Entries=[event])
+
+    # Check the response
+    if response['FailedEntryCount'] == 0:
+        print("Event published successfully")
+    else:
+        print("Failed to publish event")
+
 
 @app.route("/", methods=['POST','GET'])
 def hello():
@@ -34,15 +56,16 @@ def hello():
         print(vote)
         if vote == 'b':
             # trigger step-function
-            print("Triggering step function")
-            client = boto3.client('stepfunctions')
-            stateMachineARN = "arn:aws:states:us-east-1:279824249008:execution:EventBridgeStateMachine-SjJIEbJXZNTq:baac59d9-b1e4-4019-a7a3-ef971ae0fd46"
-            response = client.start_execution(
-                stateMachineArn = stateMachineARN,
-                name='newEventExecution',
-                input='Vote is B',
-                traceHeader='something'
-            )
+            print("triggering eventbridge")
+            
+            event_bus_name = 'default'
+            event_detail_type = 'my.event.detail.type'
+            event_source = 'customer_feedback'
+            event_detail = {'Vote': 'B'}
+
+            publish_event(event_bus_name, event_detail_type, event_source, event_detail)
+
+        
             
         print(data)
 
