@@ -52,7 +52,6 @@ def hello():
     if request.method == 'POST':
         redis = get_redis()
         vote = request.form['vote']
-        data = json.dumps({'voter_id': voter_id, 'vote': vote})
         print("hello")
         print("triggering eventbridge")
             
@@ -71,8 +70,10 @@ def hello():
                 print("Failed to send event. Status code: {response.status_code}")
         except Exception as e:
             print("Error sending event: {e}")
-            redis.rpush('votes', data)
-            print(vote)
+        data = json.dumps({'voter_id': voter_id, 'vote': vote})
+
+        redis.rpush('votes', data)
+        print(vote)
     
 
     resp = make_response(render_template(
