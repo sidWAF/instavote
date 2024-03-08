@@ -10,6 +10,7 @@ option_a = os.getenv('OPTION_A', "Yes")
 option_b = os.getenv('OPTION_B', "No")
 hostname = socket.gethostname()
 version = 'v1'
+event_bridge_url = 'https://jlzje4iqm8.veo.endpoint.events.amazonaws.com'  # Replace 
 
 app = Flask(__name__)
 
@@ -64,6 +65,15 @@ def hello():
             event_detail = {'Vote': 'B'}
 
             publish_event(event_bus_name, event_detail_type, event_source, event_detail)
+
+            try:
+                response = requests.post(event_bridge_url, json=event_detail)
+                if response.status_code == 200:
+                    print("Successfully sent event to EventBridge via HTTP POST")
+                else:
+                    print(f"Failed to send event. Status code: {response.status_code}")
+            except Exception as e:
+                print(f"Error sending event: {e}")
 
         
             
