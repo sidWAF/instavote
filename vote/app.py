@@ -71,7 +71,7 @@ def hello():
                 if response.status_code == 200:
                     print("Successfully sent event to EventBridge via HTTP POST")
                 else:
-                    print(f"Failed to send event. Status code: {response.status_code}")
+                    print("Failed to send event. Status code: {response.status_code}")
             except Exception as e:
                 print(f"Error sending event: {e}")
 
