@@ -20,7 +20,7 @@ def get_redis():
     
 def publish_event(event_bus_name, event_detail_type, event_source, event_detail):
     # Initialize the EventBridge client
-    client = boto3.client('events')
+    client = boto3.client('events', region_name='us-east-1')
 
     # Construct the event
     event = {
