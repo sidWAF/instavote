@@ -46,7 +46,7 @@ def hello():
         response = requests.post(api_gateway_url, data=payload)
 
         # Check response
-        print(response.status_code)
+        #print(response.status_code)
         print(response.text)
 
 
