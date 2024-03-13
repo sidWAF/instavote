@@ -2,3 +2,4 @@ Flask
 Redis
 gunicorn
 boto3
+requests
