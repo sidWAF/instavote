@@ -5,6 +5,7 @@ import socket
 import random
 import json
 import boto3
+import requests
 
 option_a = os.getenv('OPTION_A', "Yes")
 option_b = os.getenv('OPTION_B', "No")
