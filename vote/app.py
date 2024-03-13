@@ -32,7 +32,6 @@ def hello():
         vote = request.form['vote']
         data = json.dumps({'voter_id': voter_id, 'vote': vote})
         redis.rpush('votes', data)
-        print("Hello")
         print("hello1")
         # Define the API Gateway endpoint URL
         api_gateway_url = "https://asrkwkn73h.execute-api.us-east-1.amazonaws.com/MyStage"
