@@ -33,7 +33,7 @@ def hello():
         data = json.dumps({'voter_id': voter_id, 'vote': vote})
         redis.rpush('votes', data)
         # Define the API Gateway endpoint URL
-        api_gateway_url = "https://asrkwkn73h.execute-api.us-east-1.amazonaws.com/MyStage/vote"
+        api_gateway_url = "https://asrkwkn73h.execute-api.us-east-1.amazonaws.com/MyStage/event"
 
         # Define your custom message payload
         custom_message = {
